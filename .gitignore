@@ -1,5 +1,7 @@
 tw-back-end/tmp/cache/*
 tw-back-end/log/*
 tw-back-end/tmp/cache/bootsnap/*
+tw-back-end/tmp/cache/bootsnap/compile-cache-iseq/*/*
+
 
 
