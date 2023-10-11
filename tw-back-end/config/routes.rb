@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :user_file
+  resource :csrf_token, only: [:show], controller: 'csrf_tokens'
+
 end
