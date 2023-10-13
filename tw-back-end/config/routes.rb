@@ -7,6 +7,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :user_file
-  resource :csrf_token, only: [:show], controller: 'csrf_tokens'
-
+  patch 'user_file.json', to: 'user_file#update', defaults: { format: 'json' }
 end

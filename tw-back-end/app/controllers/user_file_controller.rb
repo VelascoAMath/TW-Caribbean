@@ -10,13 +10,10 @@ class UserFileController < ApplicationController
     end
 
     def new
-        Rails.logger.info(params)
         @user_file = UserFile.new
     end
 
     def create
-        Rails.logger.info("--------------------");
-        Rails.logger.info(user_file_params)
         @user_file = UserFile.new(user_file_params)
 
         if @user_file.save
@@ -25,6 +22,16 @@ class UserFileController < ApplicationController
             render json: @user_file.errors, status: :unprocessable_entity
           end
 
+    end
+
+    def update
+        permitted = params.permit(user_file: [:content])
+        id = permitted.to_hash()["id"]
+        content = permitted.to_hash()["user_file"]["content"]
+        user_file = UserFile.find(params[:id])
+        user_file.content = content
+        user_file.save!
+        render plain: "YES"
     end
 
     private
