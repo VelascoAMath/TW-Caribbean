@@ -60,7 +60,7 @@ export default function FileSelection() {
 
 	let result = null;
 	if (fileList) {
-	result = fileList.map(file => <Button className='file-select' key={file.id} onClick={() => {alert(file.id); navigate(file.id)}}>{file.name}</Button>);
+	result = fileList.map(file => <Button className='file-select' key={file.id} onClick={() => {navigate('/' + file.id)}}>{file.name}</Button>);
 	} else {
 	result = [];
 	}
