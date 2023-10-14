@@ -41,7 +41,7 @@ export default function FileSelection() {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({user_file: {name: fileName}})
+				body: JSON.stringify({user_file: {name: fileName, content: ""}})
 			});
 
 			if(response.ok) {
