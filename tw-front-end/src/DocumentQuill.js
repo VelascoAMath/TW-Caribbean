@@ -8,7 +8,33 @@ import { useParams } from 'react-router-dom';
 
 export default function DocumentQuill() {
     const { id } = useParams();
+	const [didRequest, setDidRequest] = useState(false);
+
+	let getInitialState = async function() {
+		try{
+			const url = "http://localhost:8000/user_file/" + id + ".json";
+			const response = await fetch(url, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+
+			if(response.ok) {
+				const content = await response.json();
+				return content.content;
+			} else {
+				return "";
+			}
+		} catch (error){
+			return "";
+		}
+	}
+
     const [value, setValue] = useState("");
+	if(!didRequest){
+		getInitialState().then((value) => {setValue(value); setDidRequest(true)} );
+	}
     // return  <ReactQuill theme="snow" value={value} onChange={setValue} />;
 
     let handleUpdatingContent = async function(){
@@ -39,12 +65,7 @@ export default function DocumentQuill() {
     return(
     <div>
         <Button onClick={() => {handleUpdatingContent(); }}>Save</Button>
-        <Form>
-            <Form.Group >
-                <Form.Control className='notepad' onChange={(e) => {setValue(e.target.value)}}>
-                </Form.Control>
-            </Form.Group>
-        </Form>
+		<input type="text" className='notepad' value={value} onChange={(e) => {setValue(e.target.value)}}/>
     </div>
     );
 }
