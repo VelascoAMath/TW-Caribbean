@@ -6,7 +6,7 @@ class UserFileController < ApplicationController
     end
 
     def show
-        render plain: "Hello " + params[:id]
+        render json: UserFile.find(params[:id]);
     end
 
     def new
